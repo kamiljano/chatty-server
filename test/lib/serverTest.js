@@ -22,15 +22,27 @@ describe('GIVEN a chatty server', () => {
 
   after(() => server.stop());
 
-  const createUser = username => request.post(`${URL_BASE}/users`, {
+  const createUser = (username, jar) => request.post(`${URL_BASE}/users`, {
     json: true,
     resolveWithFullResponse: true,
-    body: {username}
+    body: {username},
+    jar
   });
 
   it('WHEN requesting a new username, THEN the username is successfully acquired', async () => {
     const response = await createUser('newUser');
     response.statusCode.should.equal(httpStatus.CREATED);
+  });
+
+  it('WHEN requesting a new username and then requesting for the data for the current session, THEN the current session is returned', async () => {
+    const cookieJar = request.jar();
+    const username = 'userWithSession';
+    await createUser(username, cookieJar);
+    const currentSession = await request.get(`${URL_BASE}/users/~`, {
+      json: true,
+      jar: cookieJar
+    });
+    currentSession.username.should.equal(username);
   });
 
   it('WHEN requesting the same username twice, THEN the second request is conflicting', async () => {
