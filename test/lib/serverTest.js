@@ -46,4 +46,15 @@ describe('GIVEN a chatty server', () => {
     error.statusCode.should.equal(httpStatus.CONFLICT);
   });
 
+  it('WHEN requesting a username with space, THEN an error is returned', async () => {
+    let error;
+    try {
+      await createUser('user in wrong format');
+    } catch (err) {
+      error = err;
+    }
+    error.should.not.be.undefined;
+    error.statusCode.should.equal(httpStatus.BAD_REQUEST);
+  });
+
 });
