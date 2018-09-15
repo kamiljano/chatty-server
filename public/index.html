@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {
+        $.ajax({
+          async: false,
+          url: 'http://localhost:5555/api/v1/users',
+          dataType: 'json',
+          method: 'POST',
+          data: JSON.stringify({ username: 'asasdfasdfdf'}),
+          contentType: "application/json; charset=utf-8"
+        });
+        var socket = io();
+        socket.emit('privateChat', 'asdf');
+      });
+    </script>
+  </head>
+  <body>
+    safd
+  </body>
+
+</html>
