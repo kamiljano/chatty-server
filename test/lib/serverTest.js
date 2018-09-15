@@ -58,17 +58,17 @@ describe('GIVEN a chatty server', () => {
     error.statusCode.should.equal(httpStatus.BAD_REQUEST);
   });
 
-  // it('WHEN 2 users send private messages to each other, THEN the messages are successfully delivered', async () => {
-  //   const {user: user1} = await userMock.createUser(URL_BASE, 'user1');
-  //   const {user: user2} = await userMock.createUser(URL_BASE, 'user2');
-  //   const messagePromise = new Promise(resolve => user2.onPrivateMessage(resolve));
-  //   const messageToSend = 'testMessage';
-  //   await user1.sendPrivateMessage(user2.username, messageToSend);
-  //   const message = await messagePromise;
-  //   message.body.should.equal(messageToSend);
-  //   message.sender.should.equal(user1.username);
-  //   user1.close();
-  //   user2.close();
-  // });
+  it('WHEN 2 users send private messages to each other, THEN the messages are successfully delivered', async () => {
+    const {user: user1} = await userMock.createUser(URL_BASE, 'user1');
+    const {user: user2} = await userMock.createUser(URL_BASE, 'user2');
+    const messagePromise = new Promise(resolve => user2.onPrivateMessage(resolve));
+    const messageToSend = 'testMessage';
+    await user1.sendPrivateMessage(user2.username, messageToSend);
+    const message = await messagePromise;
+    message.body.should.equal(messageToSend);
+    message.sender.should.equal(user1.username);
+    user1.close();
+    user2.close();
+  });
 
 });
