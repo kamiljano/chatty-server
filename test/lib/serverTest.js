@@ -7,8 +7,9 @@ chai.should();
 const {Server} = require('../../lib/server');
 const httpStatus = require('http-status-codes');
 const userMock = require('./userMock');
+const request = require('request-promise-native');
 
-const PORT = 3000;
+const PORT = 6666;
 const URL_BASE = `http://localhost:${PORT}`;
 
 describe('GIVEN a chatty server', () => {
@@ -56,6 +57,17 @@ describe('GIVEN a chatty server', () => {
     }
     error.should.not.be.undefined;
     error.statusCode.should.equal(httpStatus.BAD_REQUEST);
+  });
+
+  it('WHEN sending a request to an endpoint that requires authentication but without authenticating first, THEN an appropriate error is returned', async () => {
+    let error;
+    try {
+      await request.get(`${URL_BASE}/api/v1/users`);
+    } catch (err) {
+      error = err;
+    }
+    error.should.not.be.undefined;
+    error.statusCode.should.equal(httpStatus.UNAUTHORIZED);
   });
 
 });

@@ -1,11 +1,11 @@
 'use strict';
 
 const request = require('request-promise-native');
-const io = require('socket.io-client');
 
 class User {
 
-  constructor(username, cookieJar, urlBase, socket) {
+  constructor(username, cookieJar, urlBase) {
+    this.username = username;
     this.cookieJar = cookieJar;
     this.urlBase = urlBase;
   }
