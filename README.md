@@ -6,8 +6,9 @@ A small chat server written in Node.js.
 The chat supports:
 
 * choosing a nick name
-* talking on the room
 * sending private messages
+
+The UI compatible with this server can be found [here](https://github.com/kamiljano/chatty-ui)
 
 # Test
 
