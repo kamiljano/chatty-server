@@ -17,7 +17,7 @@ describe('GIVEN a chatty server', () => {
   let server;
 
   beforeEach(() => {
-    server = new Server(PORT);
+    server = new Server({port: PORT});
     return server.start();
   });
 

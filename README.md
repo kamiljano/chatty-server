@@ -15,4 +15,7 @@ The chat supports:
     
 # Run
 
-    node index.js
+    node index.js --uiUrl 'http://localhost:3000'
+    
+The parameter `uiUrl` is used to set up the CORS headers. If not specified,
+by default it points to `http://localhost:3000`
