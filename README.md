@@ -16,7 +16,7 @@ The UI compatible with this server can be found [here](https://github.com/kamilj
     
 # Run
 
-    node index.js --uiUrl 'http://localhost:3000'
+    node index.js --uiUrl http://localhost:3000
     
 The parameter `uiUrl` is used to set up the CORS headers. If not specified,
 by default it points to `http://localhost:3000`
